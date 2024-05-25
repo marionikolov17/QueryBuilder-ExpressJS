@@ -1,6 +1,10 @@
 import express from "express";
 
+import expressConfig from "./config/express.config";
+
 const app = express();
+
+expressConfig(app);
 
 // Simulate getDetail
 app.get("/detail", (req: express.Request, res: express.Response) => {
