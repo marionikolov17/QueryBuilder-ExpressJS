@@ -47,7 +47,7 @@ router.post("/create", async (req: express.Request, res: express.Response) => {
   }
 });
 
-router.put("/updateSpecs", async (req: express.Request, res: express.Response) => {
+router.post("/createSpecs", async (req: express.Request, res: express.Response) => {
   try {
     const createdUserSpecs = await userService.createUserSpecs(req.body);
 
