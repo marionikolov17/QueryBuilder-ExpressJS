@@ -29,6 +29,8 @@ const fieldMapObj: any = {
 const convertFields = (fields: any) => {
   let resultFields = [];
   for (let [key, value] of Object.entries(fields)) {
+    if (value !== 1) continue;
+
     if (!fieldMapObj.hasOwnProperty(key)) {
       // Field from another table
       continue;
