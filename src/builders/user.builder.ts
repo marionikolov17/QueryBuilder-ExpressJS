@@ -1,10 +1,27 @@
+import { Op } from "sequelize";
 import User from "./../database/models/user";
 
 const operationsObj = {
-    "EQ": "",
-    "NE": "",
-    "LT": "",
-    "GT": ""
+    "EQ": Op.eq,
+    "NE": Op.ne,
+    "LT": Op.lt,
+    "GT": Op.gt
+}
+
+const fieldMapObj = {
+    "uid": "id",
+    "firstName": "first_name",
+    "lastName": "last_name",
+    "userName": "username",
+    "email": "email",
+    "password": "password",
+    "profilePicture": "profile_picture_url",
+    "country": "country",
+    "userLanguages": "languages",
+    "phoneNumber": "phone_number",
+    "userRole": "user_role",
+    "visible": "visible",
+    "dateCreated": "date_created",
 }
 
 const convertCondition = () => {
