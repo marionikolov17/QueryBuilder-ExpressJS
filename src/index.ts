@@ -37,10 +37,10 @@ app.get("/list", async (req: express.Request, res: express.Response) => {
 app.post("/create", async (req: express.Request, res: express.Response) => {
   try {
     const createdUser = await User.create({
-      first_name: "mario",
-      last_name: "nikolov",
-      username: "KINGUSER",
-      email: "king@gmail.com",
+      first_name: "mark",
+      last_name: "georgiev",
+      username: "mmm",
+      email: "mmm@gmail.com",
       password: "1234",
       profile_picture_url: "/url/to/photo",
       languages: "1,2,3",
