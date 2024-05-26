@@ -14,6 +14,9 @@ const fieldsMap: any = {
     visible: "visible",
     dateCreated: "date_created",
   },
+  userSpecs: {
+    
+  }
 };
 
 export default fieldsMap;
