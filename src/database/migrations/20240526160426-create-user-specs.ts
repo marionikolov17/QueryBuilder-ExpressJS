@@ -17,10 +17,6 @@ const functions = {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
         unique: true,
-        references: {
-          model: User,
-          key: "id"
-        }
       },
       weight: {
         type: Sequelize.TINYINT.UNSIGNED,

@@ -31,10 +31,6 @@ UserSpecs.init({
     type: DataTypes.INTEGER.UNSIGNED,
     allowNull: false,
     unique: true,
-    references: {
-      model: User,
-      key: "id"
-    }
   },
   weight: {
     type: DataTypes.TINYINT.UNSIGNED,
