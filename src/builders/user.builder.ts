@@ -46,6 +46,7 @@ class UserBuilder {
     public limit: number = 20;
     public offset: number = 0;
     public fields: any = {
+        "uid": 1,
         "firstName": 1,
         "lastName": 1
     };
