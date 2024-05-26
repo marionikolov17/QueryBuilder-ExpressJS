@@ -25,7 +25,7 @@ export const convertFields = (fields: any, fieldMapObj: any) => {
   return resultFields;
 };
 
-export const convertCondition = (condition: any) => {
+export const convertCondition = (condition: any, fieldMapObj: any) => {
   let resultConditions: any;
 
   if (condition.type === "AND") {
@@ -33,7 +33,7 @@ export const convertCondition = (condition: any) => {
 
     for (let item of condition.items) {
       let logicalObj: any = {};
-      logicalObj[item.field] = {
+      logicalObj[fieldMapObj[item.field]] = {
         [operationsObj[item.operation]]: [item.value],
       };
       resultConditions.push(logicalObj);
@@ -49,7 +49,7 @@ export const convertCondition = (condition: any) => {
 
   for (let item of condition.items) {
     let logicalObj: any = {};
-    logicalObj[item.field] = {
+    logicalObj[fieldMapObj[item.field]] = {
       [operationsObj[item.operation]]: [item.value],
     };
     logicalArr.push(logicalObj);

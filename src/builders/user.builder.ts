@@ -28,12 +28,12 @@ class UserBuilder {
     type: "OR",
     items: [
       {
-        field: "first_name",
+        field: "firstName",
         operation: "NE",
         value: "mario",
       },
       {
-        field: "first_name",
+        field: "firstName",
         operation: "EQ",
         value: "ivan",
       },
@@ -48,7 +48,7 @@ class UserBuilder {
       where: {},
     };
     queryObj["attributes"] = convertFields(this.fields, this.fieldMapObj);
-    queryObj["where"] = convertCondition(this.condition);
+    queryObj["where"] = convertCondition(this.condition, this.fieldMapObj);
     return User.findAll(queryObj);
   }
 }
