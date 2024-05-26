@@ -33,8 +33,8 @@ app.get("/list", async (req: express.Request, res: express.Response) => {
 app.post("/create", async (req: express.Request, res: express.Response) => {
   try {
     const createdUser = await User.create({
-      first_name: "KING USER",
-      last_name: "KING",
+      first_name: "mario",
+      last_name: "nikolov",
       username: "KINGUSER",
       email: "king@gmail.com",
       password: "1234",
