@@ -21,12 +21,15 @@ class UserBuilder {
       attributes: [],
       where: {},
     };
+
     if(this.id !== null) {
       delete queryObj["limit"];
       delete queryObj["offset"];
     }
+
     queryObj["attributes"] = convertFields(this.fields, this.fieldMapObj);
     queryObj["where"] = convertCondition(this.condition, this.fieldMapObj, this.id);
+    
     return User.findAll(queryObj);
   }
 }
