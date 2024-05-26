@@ -22,6 +22,10 @@ const functions = {
         allowNull: true,
         defaultValue: null
       },
+      email: {
+        type: Sequelize.STRING(45),
+        allowNull: false
+      },
       username: {
         type: Sequelize.STRING(45),
         allowNull: false
