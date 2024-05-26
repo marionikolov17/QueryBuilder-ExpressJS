@@ -26,61 +26,63 @@ UserSpecs.init({
     primaryKey: true,
     unique: true
   },
-  first_name: {
-    type: DataTypes.STRING(45),
-    allowNull: true,
-    defaultValue: null
-  },
-  last_name: {
-    type: DataTypes.STRING(45),
-    allowNull: true,
-    defaultValue: null
-  },
-  email: {
-    type: DataTypes.STRING(45),
+  user_id: {
+    type: DataTypes.INTEGER.UNSIGNED,
     allowNull: false
   },
-  username: {
-    type: DataTypes.STRING(45),
-    allowNull: false
+  weight: {
+    type: DataTypes.TINYINT.UNSIGNED,
+    allowNull: false,
+    defaultValue: 0
   },
-  password: {
-    type: DataTypes.STRING(255),
-    allowNull: false
+  weight_goal: {
+    type: DataTypes.TINYINT.UNSIGNED,
+    allowNull: false,
+    defaultValue: 0
   },
-  profile_picture_url: {
-    type: DataTypes.STRING(255),
-    allowNull: true,
-    defaultValue: null
+  height: {
+    type: DataTypes.TINYINT.UNSIGNED,
+    allowNull: false,
+    defaultValue: 0
   },
-  country: {
-    type: DataTypes.STRING(45),
-    allowNull: true,
-    defaultValue: null
+  bmi: {
+    type: DataTypes.TINYINT.UNSIGNED,
+    allowNull: false,
+    defaultValue: 0
+  },
+  total_calorie_burned: {
+    type: DataTypes.TINYINT.UNSIGNED,
+    allowNull: false,
+    defaultValue: 0
+  },
+  total_workouts: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0
   },
   languages: {
     type: DataTypes.STRING(255),
     allowNull: false
   },
-  phone_number: {
-    type: DataTypes.STRING(25),
+  workout_preferences: {
+    type: DataTypes.STRING(45),
     allowNull: true,
     defaultValue: null
   },
-  user_role: {
-    type: DataTypes.TINYINT({ length: 1 }),
-    allowNull: false,
-    defaultValue: -1
+  sex: {
+    type: DataTypes.ENUM("male", "female"),
+    allowNull: true,
+    defaultValue: null,
   },
-  visible: {
-    type: DataTypes.TINYINT.UNSIGNED,
-    allowNull: false,
-    defaultValue: 1
+  fitness_level: {
+    type: DataTypes.ENUM("beginner","intermediate","advanced","pro"),
+    allowNull: true,
+    defaultValue: null
   },
-  date_created: {
-    type: DataTypes.DATEONLY,
-    allowNull: false,
-    defaultValue: DataTypes.NOW
+  date_of_birth: {
+    type: DataTypes.DATE,
+    allowNull: true,
+    defaultValue: null
   }
 }, {
   tableName: "user_specs",
