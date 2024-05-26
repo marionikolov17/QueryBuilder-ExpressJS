@@ -7,66 +7,64 @@ const functions = {
   async up(queryInterface: QueryInterface, Sequelize: typeof DataTypes) {
     await queryInterface.createTable('user_specs', {
       id: {
-        allowNull: false,
+        type: Sequelize.INTEGER.UNSIGNED,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        unique: true
       },
-      first_name: {
-        type: Sequelize.STRING(45),
-        allowNull: true,
-        defaultValue: null
-      },
-      last_name: {
-        type: Sequelize.STRING(45),
-        allowNull: true,
-        defaultValue: null
-      },
-      email: {
-        type: Sequelize.STRING(45),
+      user_id: {
+        type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false
       },
-      username: {
-        type: Sequelize.STRING(45),
-        allowNull: false
-      },
-      password: {
-        type: Sequelize.STRING(255),
-        allowNull: false
-      },
-      profile_picture_url: {
-        type: Sequelize.STRING(255),
-        allowNull: true,
-        defaultValue: true
-      },
-      country: {
-        type: Sequelize.STRING(45),
-        allowNull: true,
-        defaultValue: null
-      },
-      languages: {
-        type: Sequelize.STRING(255),
-        allowNull: false
-      },
-      phone_number: {
-        type: Sequelize.STRING(25),
-        allowNull: true,
-        defaultValue: null
-      },
-      user_role: {
-        type: Sequelize.TINYINT({ length: 1 }),
-        allowNull: false,
-        defaultValue: -1
-      },
-      visible: {
+      weight: {
         type: Sequelize.TINYINT.UNSIGNED,
         allowNull: false,
-        defaultValue: 1
+        defaultValue: 0
       },
-      date_created: {
-        type: Sequelize.DATEONLY,
+      weight_goal: {
+        type: Sequelize.TINYINT.UNSIGNED,
         allowNull: false,
-        defaultValue: Sequelize.NOW
+        defaultValue: 0
+      },
+      height: {
+        type: Sequelize.TINYINT.UNSIGNED,
+        allowNull: false,
+        defaultValue: 0
+      },
+      bmi: {
+        type: Sequelize.TINYINT.UNSIGNED,
+        allowNull: false,
+        defaultValue: 0
+      },
+      total_calorie_burned: {
+        type: Sequelize.TINYINT.UNSIGNED,
+        allowNull: false,
+        defaultValue: 0
+      },
+      total_workouts: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      workout_preferences: {
+        type: Sequelize.STRING(45),
+        allowNull: true,
+        defaultValue: null
+      },
+      sex: {
+        type: Sequelize.ENUM("male", "female"),
+        allowNull: true,
+        defaultValue: null,
+      },
+      fitness_level: {
+        type: Sequelize.ENUM("beginner","intermediate","advanced","pro"),
+        allowNull: true,
+        defaultValue: null
+      },
+      date_of_birth: {
+        type: Sequelize.DATE,
+        allowNull: true,
+        defaultValue: null
       },
       createdAt: {
         allowNull: false,
