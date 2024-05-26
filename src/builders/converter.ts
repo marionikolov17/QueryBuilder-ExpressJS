@@ -1,4 +1,15 @@
-export const convertFields = (fields: any) => {
+import { Op } from "sequelize";
+
+const operationsObj: any = {
+  AND: Op.and,
+  OR: Op.or,
+  EQ: Op.eq,
+  NE: Op.ne,
+  LT: Op.lt,
+  GT: Op.gt,
+};
+
+export const convertFields = (fields: any, fieldMapObj: any) => {
   let resultFields = [];
   for (let [key, value] of Object.entries(fields)) {
     if (value !== 1) continue;
