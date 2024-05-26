@@ -2,6 +2,8 @@ import express from "express";
 
 import expressConfig from "./config/express.config";
 
+import router from "./routes";
+
 import UserBuilder from "./builders/user.builder";
 import User from "./database/models/user";
 
@@ -64,6 +66,8 @@ app.post("/create", async (req: express.Request, res: express.Response) => {
     });
   }
 });
+
+app.use(router);
 
 const port = 3000;
 
