@@ -26,6 +26,7 @@ class UserBuilder {
       },
     ],
   };
+  public id: any = null;
 
   public buildQuery(): any {
     let queryObj: any = {
@@ -35,7 +36,7 @@ class UserBuilder {
       where: {},
     };
     queryObj["attributes"] = convertFields(this.fields, this.fieldMapObj);
-    queryObj["where"] = convertCondition(this.condition, this.fieldMapObj);
+    queryObj["where"] = convertCondition(this.condition, this.fieldMapObj, this.id);
     return User.findAll(queryObj);
   }
 }

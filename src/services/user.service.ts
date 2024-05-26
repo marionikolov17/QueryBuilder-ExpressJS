@@ -8,6 +8,11 @@ export const getUsers = async () => {
     return builder.buildQuery();
 }
 
-export const getUser = async (id: any) => {}
+export const getUser = async (id: any) => {
+    let builder = new UserBuilder;
+    builder.id = id;
+
+    return builder.buildQuery();
+}
 
 export const createUser = async (data: any) => User.create(data);

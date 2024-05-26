@@ -25,8 +25,13 @@ export const convertFields = (fields: any, fieldMapObj: any) => {
   return resultFields;
 };
 
-export const convertCondition = (condition: any, fieldMapObj: any) => {
+export const convertCondition = (condition: any, fieldMapObj: any, id: any) => {
   let resultConditions: any;
+
+  if (id !== null) {
+    resultConditions = { id }
+    return resultConditions;
+  }
 
   if (condition.type === "AND") {
     resultConditions = [];
