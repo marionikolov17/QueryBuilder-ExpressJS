@@ -1,6 +1,7 @@
 'use strict';
 
 import { DataTypes, QueryInterface } from "sequelize";
+import User from "./../models/user";
 
 /** @type {import('sequelize-cli').Migration} */
 const functions = {
@@ -14,7 +15,12 @@ const functions = {
       },
       user_id: {
         type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false
+        allowNull: false,
+        unique: true,
+        references: {
+          model: User,
+          key: "id"
+        }
       },
       weight: {
         type: Sequelize.TINYINT.UNSIGNED,

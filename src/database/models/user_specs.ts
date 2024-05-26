@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import connection from "./../connection";
+import User from "./user";
 
 class UserSpecs extends Model {
   public readonly id!: number;
@@ -28,7 +29,12 @@ UserSpecs.init({
   },
   user_id: {
     type: DataTypes.INTEGER.UNSIGNED,
-    allowNull: false
+    allowNull: false,
+    unique: true,
+    references: {
+      model: User,
+      key: "id"
+    }
   },
   weight: {
     type: DataTypes.TINYINT.UNSIGNED,
