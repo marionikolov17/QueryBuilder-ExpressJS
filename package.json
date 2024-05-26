@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
+    "start:dev": "nodemon",
     "create-db": "ts-node src/createDatabase.ts",
     "model:create": "npx sequelize-cli model:generate",
     "migrate": "npx sequelize-cli db:migrate",
