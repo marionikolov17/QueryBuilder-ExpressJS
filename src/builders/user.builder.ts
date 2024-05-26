@@ -48,7 +48,6 @@ class UserBuilder {
       where: {},
     };
     queryObj["attributes"] = convertFields(this.fields, this.fieldMapObj);
-    console.log(convertCondition(this.condition));
     queryObj["where"] = convertCondition(this.condition);
     return User.findAll(queryObj);
   }
