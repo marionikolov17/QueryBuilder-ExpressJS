@@ -47,4 +47,25 @@ router.post("/create", async (req: express.Request, res: express.Response) => {
   }
 });
 
+router.put("/updateSpecs", async (req: express.Request, res: express.Response) => {
+  try {
+    const createdUserSpecs = await userService.createUserSpecs(req.body);
+
+    res.status(201).json({
+      status: "success",
+      data: {
+        message: "Successfully created user!",
+        user: createdUserSpecs,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "error",
+      data: {
+        message: err.message,
+      },
+    });
+  }
+});
+
 export default router;

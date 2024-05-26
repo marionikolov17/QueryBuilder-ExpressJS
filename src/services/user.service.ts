@@ -1,5 +1,6 @@
 import UserBuilder from "./../builders/user.builder";
 import User from "./../database/models/user";
+import UserSpecs from "./../database/models/user_specs";
 
 export const getUsers = async (payload: any) => {
     let builder = new UserBuilder;
@@ -18,3 +19,5 @@ export const getUser = async (payload: any) => {
 }
 
 export const createUser = async (data: any) => User.create(data);
+
+export const createUserSpecs = async (data: any) => UserSpecs.create(data);
