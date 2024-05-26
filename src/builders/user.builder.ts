@@ -10,22 +10,8 @@ class UserBuilder {
     uid: 1,
     firstName: 1,
     lastName: 1,
-  };
-  public condition: any = {
-    type: "OR",
-    items: [
-      {
-        field: "firstName",
-        operation: "NE",
-        value: "mario",
-      },
-      {
-        field: "firstName",
-        operation: "EQ",
-        value: "ivan",
-      },
-    ],
-  };
+  }; // Default fields for selection
+  public condition: any; // You can pass default conditions here
   public id: any = null;
 
   public buildQuery(): any {
