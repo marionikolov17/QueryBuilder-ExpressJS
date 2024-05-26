@@ -60,10 +60,6 @@ UserSpecs.init({
     allowNull: false,
     defaultValue: 0
   },
-  languages: {
-    type: DataTypes.STRING(255),
-    allowNull: false
-  },
   workout_preferences: {
     type: DataTypes.STRING(45),
     allowNull: true,
