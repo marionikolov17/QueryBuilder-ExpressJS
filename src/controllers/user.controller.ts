@@ -1,5 +1,3 @@
-import UserBuilder from "./../builders/user.builder";
-import User from "./../database/models/user";
 import express from "express";
 
 import * as userService from "./../services/user.service";
