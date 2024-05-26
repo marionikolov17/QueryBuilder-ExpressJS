@@ -54,7 +54,7 @@ router.post("/createSpecs", async (req: express.Request, res: express.Response) 
     res.status(201).json({
       status: "success",
       data: {
-        message: "Successfully created user!",
+        message: "Successfully created user specs!",
         user: createdUserSpecs,
       },
     });
