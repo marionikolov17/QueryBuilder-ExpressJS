@@ -21,10 +21,14 @@ app.get("/detail", (req: express.Request, res: express.Response) => {
 
 // Simulate getList
 app.get("/list", async (req: express.Request, res: express.Response) => {
+  const builder = new UserBuilder();
+
+  const result = await builder.buildQuery();
+
   res.status(200).json({
     status: "success",
     data: {
-      message: "working",
+      result
     },
   });
 });
