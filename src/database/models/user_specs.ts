@@ -3,18 +3,17 @@ import connection from "./../connection";
 
 class UserSpecs extends Model {
   public readonly id!: number;
-  public first_name!: string | null;
-  public last_name!: string | null;
-  public username!: string;
-  public email!: string;
-  public password!: string;
-  public profile_picture_url!: string | null;
-  public country!: string | null;
-  public languages!: string;
-  public phone_number!: string | null;
-  public user_role!: number;
-  public visible!: number;
-  public date_created!: Date;
+  public user_id!: number;
+  public weight!: number;
+  public weight_goal!: number;
+  public height!: number;
+  public bmi!: number;
+  public total_calorie_burned!: number;
+  public total_workouts!: number;
+  public workout_preferences!: string | null;
+  public sex!: string | null;
+  public fitness_level!: string | null;
+  public date_of_birth!: Date | null;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -84,7 +83,7 @@ UserSpecs.init({
     defaultValue: DataTypes.NOW
   }
 }, {
-  tableName: "users_specs",
+  tableName: "user_specs",
   sequelize: connection
 });
 
