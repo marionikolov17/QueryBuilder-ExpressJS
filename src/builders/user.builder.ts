@@ -8,7 +8,7 @@ const operationsObj = {
     "GT": Op.gt
 }
 
-const fieldMapObj = {
+const fieldMapObj: any = {
     "uid": "id",
     "firstName": "first_name",
     "lastName": "last_name",
@@ -22,6 +22,20 @@ const fieldMapObj = {
     "userRole": "user_role",
     "visible": "visible",
     "dateCreated": "date_created",
+}
+
+const convertFields = (fields: any) => {
+    let resultFields = [];
+    for (let [key, value] of Object.entries(fields)) {
+        if (!fieldMapObj.hasOwnProperty(key)) {
+            // Field from another table
+            continue
+        }
+
+        resultFields.push(fieldMapObj[key]);
+    }
+
+    return resultFields;
 }
 
 const convertCondition = () => {
@@ -49,7 +63,6 @@ class UserBuilder {
     };
 
     buildQuery(): any {
-        let queryObj: any = { limit: this.limit, offset: this.offset, attributes: [...this.fields] };
-
+        let queryObj: any = { limit: this.limit, offset: this.offset, attributes: [], where: {} };
     }
 }
