@@ -1,22 +1,9 @@
 import User from "./../database/models/user";
 import { convertFields, convertCondition } from "./converter";
+import fieldsMap from "./fields";
 
 class UserBuilder {
-  private fieldMapObj: any = {
-    uid: "id",
-    firstName: "first_name",
-    lastName: "last_name",
-    userName: "username",
-    email: "email",
-    password: "password",
-    profilePicture: "profile_picture_url",
-    country: "country",
-    userLanguages: "languages",
-    phoneNumber: "phone_number",
-    userRole: "user_role",
-    visible: "visible",
-    dateCreated: "date_created",
-  };
+  private fieldMapObj: any = fieldsMap["user"];
   public limit: number = 20;
   public offset: number = 0;
   public fields: any = {
