@@ -45,7 +45,10 @@ const convertCondition = () => {
 class UserBuilder {
     public limit: number = 20;
     public offset: number = 0;
-    public fields: any = ["first_name", "last_name"];
+    public fields: any = {
+        "firstName": 1,
+        "lastName": 1
+    };
     public condition: any = {
         type: "AND",
         items: [
@@ -62,8 +65,8 @@ class UserBuilder {
         ]
     };
 
-    buildQuery(): any {
-        let queryObj: any = { limit: this.limit, offset: this.offset, attributes: [], where: {} };
+    public buildQuery(): any {
+        let queryObj: any = { limit: this.limit, offset: this.offset, attributes: [] };
         queryObj["attributes"] = convertFields(this.fields);
 
         return User.findAll(queryObj);
