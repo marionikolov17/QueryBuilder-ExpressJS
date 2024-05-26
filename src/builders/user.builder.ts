@@ -64,5 +64,10 @@ class UserBuilder {
 
     buildQuery(): any {
         let queryObj: any = { limit: this.limit, offset: this.offset, attributes: [], where: {} };
+        queryObj["attributes"] = convertFields(this.fields);
+
+        return User.findAll(queryObj);
     }
 }
+
+export default UserBuilder;
