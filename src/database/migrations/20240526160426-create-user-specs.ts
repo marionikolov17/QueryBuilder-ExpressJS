@@ -79,7 +79,7 @@ const functions = {
     });
   },
   async down(queryInterface: QueryInterface, Sequelize: any) {
-    await queryInterface.dropTable('users_specs');
+    await queryInterface.dropTable('user_specs');
   }
 };
 
