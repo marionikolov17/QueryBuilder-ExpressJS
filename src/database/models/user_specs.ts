@@ -1,4 +1,4 @@
-import { DataTypes, Model } from "sequelize";
+import { Association, DataTypes, Model } from "sequelize";
 import connection from "./../connection";
 import User from "./user";
 
@@ -31,6 +31,11 @@ UserSpecs.init({
     type: DataTypes.INTEGER.UNSIGNED,
     allowNull: false,
     unique: true,
+    references: {
+      model: "Users",
+      key: "id"
+    },
+    onDelete: "CASCADE"
   },
   weight: {
     type: DataTypes.TINYINT.UNSIGNED,
@@ -85,6 +90,14 @@ UserSpecs.init({
 }, {
   tableName: "user_specs",
   sequelize: connection
+});
+
+User.hasOne(UserSpecs, {
+  foreignKey: "user_id",
+  as: "user_specs"
+});
+UserSpecs.belongsTo(User, {
+  foreignKey: "user_id"
 });
 
 export default UserSpecs;

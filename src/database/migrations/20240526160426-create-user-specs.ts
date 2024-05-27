@@ -17,6 +17,11 @@ const functions = {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
         unique: true,
+        references: {
+          model: "Users",
+          key: "id"
+        },
+        onDelete: "CASCADE"
       },
       weight: {
         type: Sequelize.TINYINT.UNSIGNED,
@@ -76,7 +81,7 @@ const functions = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    })
   },
   async down(queryInterface: QueryInterface, Sequelize: any) {
     await queryInterface.dropTable('user_specs');

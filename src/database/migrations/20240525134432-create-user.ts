@@ -10,7 +10,7 @@ const functions = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER.UNSIGNED
       },
       first_name: {
         type: Sequelize.STRING(45),

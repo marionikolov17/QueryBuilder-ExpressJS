@@ -85,6 +85,7 @@ User.init({
   }
 }, {
   tableName: "users",
+  modelName: "User",
   sequelize: connection
 });
 
