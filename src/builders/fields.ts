@@ -1,4 +1,4 @@
-const fieldsMap: any = {
+export const fieldsMap: any = {
   user: {
     uid: "id",
     firstName: "first_name",
@@ -14,9 +14,13 @@ const fieldsMap: any = {
     visible: "visible",
     dateCreated: "date_created",
   },
-  userSpecs: {
+  user_specs: {
+    userId: "user_id",
     sex: "sex"
   }
 };
 
-export default fieldsMap;
+export const associationsObj: any = {
+  user: ["user_specs"] // fieldsMap names only
+}
+

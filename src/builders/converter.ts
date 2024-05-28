@@ -1,4 +1,5 @@
 import { Op } from "sequelize";
+import {fieldsMap, associationsObj} from "./fields";
 
 const operationsObj: any = {
   AND: Op.and,
@@ -8,6 +9,54 @@ const operationsObj: any = {
   LT: Op.lt,
   GT: Op.gt,
 };
+
+export const findAssociatedFiels = (fields: any, fieldMapObj: any) => {
+  let associatedFields = [];
+  for (let [key, value] of Object.entries(fields)) {
+    if (value !== 1) continue;
+
+    if (!fieldMapObj.hasOwnProperty(key)) {
+      // Field from another table
+      associatedFields.push(key)
+      continue;
+    }
+  }
+  return associatedFields;
+}
+
+export const convertAssociatedFields = (fields: any, model: any) => {
+  const associatiedTables = associationsObj[model];
+  let associationsResultArr: any = [];
+  let includeArr: any = [];
+
+  // Find from which table are coming the associations fields
+  for (let associationTable of associatiedTables) {
+    let fieldsMapObj = fieldsMap[associationTable];
+
+    for (let [key, value] of Object.entries(fieldsMapObj)) {
+      // Find the associatedField in associatedTable
+      if (fields.includes(key)) {
+        let resultObj: any = {};
+        resultObj[fieldsMapObj[key]] = associationTable;
+        associationsResultArr.push(resultObj)
+      }
+    }
+  }
+
+  console.log(associationsResultArr);
+
+  for (let association of associationsResultArr) {
+    let [field, table] = Object.entries(association)[0];
+    let includeObj: any = {
+      association: table,
+      attributes: [field]
+    }
+    includeArr.push(includeObj);
+  }
+
+  console.log(includeArr);
+  return includeArr;
+}
 
 export const convertFields = (fields: any, fieldMapObj: any) => {
   let resultFields = [];
