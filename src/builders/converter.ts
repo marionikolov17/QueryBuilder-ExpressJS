@@ -43,8 +43,6 @@ export const convertAssociatedFields = (fields: any, model: any) => {
     }
   }
 
-  console.log(associationsResultArr);
-
   for (let association of associationsResultArr) {
     let [field, table] = Object.entries(association)[0];
     let includeObj: any = {
@@ -54,7 +52,6 @@ export const convertAssociatedFields = (fields: any, model: any) => {
     includeArr.push(includeObj);
   }
 
-  console.log(includeArr);
   return includeArr;
 }
 
