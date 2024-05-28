@@ -1,7 +1,6 @@
 'use strict';
 
 import { DataTypes, QueryInterface } from "sequelize";
-import User from "./../models/user";
 
 /** @type {import('sequelize-cli').Migration} */
 const functions = {
