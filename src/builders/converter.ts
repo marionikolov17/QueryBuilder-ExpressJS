@@ -55,6 +55,14 @@ export const convertAssociatedFields = (fields: any, model: any) => {
   return includeArr;
 };
 
+export const FindAssociatedConditions = (condition: any) => {
+
+}
+
+export const convertAssociatedConditions = (includeArr: any, fields: any) => {
+  
+}
+
 export const convertFields = (fields: any, fieldMapObj: any) => {
   let resultFields = [];
   for (let [key, value] of Object.entries(fields)) {
