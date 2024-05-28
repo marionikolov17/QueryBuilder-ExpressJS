@@ -15,7 +15,7 @@ const fieldsMap: any = {
     dateCreated: "date_created",
   },
   userSpecs: {
-    
+    sex: "sex"
   }
 };
 
