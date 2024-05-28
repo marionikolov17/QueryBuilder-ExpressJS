@@ -1,5 +1,5 @@
 import { Op } from "sequelize";
-import {fieldsMap, associationsObj} from "./fields";
+import { fieldsMap, associationsObj } from "./fields";
 
 const operationsObj: any = {
   AND: Op.and,
@@ -17,12 +17,12 @@ export const findAssociatedFiels = (fields: any, fieldMapObj: any) => {
 
     if (!fieldMapObj.hasOwnProperty(key)) {
       // Field from another table
-      associatedFields.push(key)
+      associatedFields.push(key);
       continue;
     }
   }
   return associatedFields;
-}
+};
 
 export const convertAssociatedFields = (fields: any, model: any) => {
   const associatiedTables = associationsObj[model];
@@ -38,7 +38,7 @@ export const convertAssociatedFields = (fields: any, model: any) => {
       if (fields.includes(key)) {
         let resultObj: any = {};
         resultObj[fieldsMapObj[key]] = associationTable;
-        associationsResultArr.push(resultObj)
+        associationsResultArr.push(resultObj);
       }
     }
   }
@@ -47,13 +47,13 @@ export const convertAssociatedFields = (fields: any, model: any) => {
     let [field, table] = Object.entries(association)[0];
     let includeObj: any = {
       association: table,
-      attributes: [field]
-    }
+      attributes: [field],
+    };
     includeArr.push(includeObj);
   }
 
   return includeArr;
-}
+};
 
 export const convertFields = (fields: any, fieldMapObj: any) => {
   let resultFields = [];
@@ -75,7 +75,7 @@ export const convertCondition = (condition: any, fieldMapObj: any, id: any) => {
   let resultConditions: any;
 
   if (id !== null) {
-    resultConditions = { id }
+    resultConditions = { id };
     return resultConditions;
   }
 
@@ -84,6 +84,12 @@ export const convertCondition = (condition: any, fieldMapObj: any, id: any) => {
 
     for (let item of condition.items) {
       let logicalObj: any = {};
+
+      if (!fieldMapObj.hasOwnProperty(item.field)) {
+        // Field from another table
+        continue
+      }
+
       logicalObj[fieldMapObj[item.field]] = {
         [operationsObj[item.operation]]: [item.value],
       };
@@ -100,6 +106,12 @@ export const convertCondition = (condition: any, fieldMapObj: any, id: any) => {
 
   for (let item of condition.items) {
     let logicalObj: any = {};
+
+    if (!fieldMapObj.hasOwnProperty(item.field)) {
+      // Field from another table
+      continue
+    }
+
     logicalObj[fieldMapObj[item.field]] = {
       [operationsObj[item.operation]]: [item.value],
     };
