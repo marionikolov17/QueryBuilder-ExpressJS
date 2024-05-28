@@ -24,6 +24,11 @@ export const findAssociatedFiels = (fields: any, fieldMapObj: any) => {
   return associatedFields;
 };
 
+// ASSOCIATED FIELDS DOWN
+// AND CONDITION -> 
+// OR CONDITION -> SPECIFY OR IN WHERE CLAUSE
+
+
 export const convertAssociatedFields = (fields: any, model: any) => {
   const associatiedTables = associationsObj[model];
   let associationsResultArr: any = [];

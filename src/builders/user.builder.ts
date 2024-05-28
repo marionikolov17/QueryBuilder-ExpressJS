@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import User from "./../database/models/user";
 import { convertFields, convertCondition, findAssociatedFiels, convertAssociatedFields } from "./converter";
 import {fieldsMap} from "./fields";
@@ -35,6 +36,23 @@ class UserBuilder {
     queryObj["include"] = convertAssociatedFields(associatedFields, "user");
     
     return User.findAll(queryObj);
+    /* return User.findAll({
+      limit: 20,
+      offset: 0,
+      attributes: ["first_name", "last_name", "id"],
+      where: {
+        [Op.or]: [{ first_name: "mario" }]
+      },
+      include: [
+        {
+          association: "user_specs",
+          attributes: ["sex"],
+          where: {
+            sex: "male"
+          }
+        }
+      ]
+    }) */
   }
 }
 
