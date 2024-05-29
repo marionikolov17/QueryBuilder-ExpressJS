@@ -1,5 +1,12 @@
 import { associationsObj, fieldsMap } from "./fields";
 
+const OPERATIONS = {
+    "EQ": "=",
+    "NE": "!=",
+    "LT": "<",
+    "GT": ">"
+}
+
 const mapAssociatedField = (field: any, table: any) => {
     let associationsTables = associationsObj[table];
     let resultObj: any = {};
@@ -47,5 +54,5 @@ export const makeSelectQuery = (query:any, fields: any, fieldMapObj: any, table:
 }
 
 export const makeWhereClause = (query: any, condition: any, fieldMapObj: any, table: any) => {
-
+    const conditionType = condition.type;
 }
