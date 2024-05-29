@@ -3,7 +3,7 @@ import type { Knex } from "knex";
 export async function up(knex: Knex): Promise<void> {
     return knex.schema.createTable("user_specs", (table) => {
         table.increments("id").primary().unsigned().unique();
-        table.integer("user_id").notNullable().unique();
+        table.integer("user_id").notNullable().unique().references("id").inTable("users");
         table.tinyint("weight").unsigned().notNullable().defaultTo(0);
         table.tinyint("weight_goal").unsigned().notNullable().defaultTo(0);
         table.tinyint("height").unsigned().notNullable().defaultTo(0);
