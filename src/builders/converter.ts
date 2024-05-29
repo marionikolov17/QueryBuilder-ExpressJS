@@ -7,10 +7,6 @@ const OPERATIONS: any = {
     "GT": ">"
 }
 
-export const joinAssociatedTables = () => {
-
-}
-
 const mapAssociatedField = (field: any, table: any) => {
     let associationsTables = associationsObj[table];
     let resultObj: any = {};
