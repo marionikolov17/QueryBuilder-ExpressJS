@@ -1,7 +1,7 @@
 import { associationsObj, fieldsMap } from "./fields";
 
-const mapAssociatedField = (field: any, model: any) => {
-    let associationsTables = associationsObj[model];
+const mapAssociatedField = (field: any, table: any) => {
+    let associationsTables = associationsObj[table];
     let resultObj: any = {};
 
     for (let associationTable of associationsTables) {
@@ -17,7 +17,7 @@ const mapAssociatedField = (field: any, model: any) => {
     return resultObj;
 }
 
-export const makeSelectQuery = (query:any, fields: any, fieldMapObj: any, model: any) => {
+export const makeSelectQuery = (query:any, fields: any, fieldMapObj: any, table: any) => {
     let fieldsInTables = [];
 
     // Find fields
@@ -28,12 +28,12 @@ export const makeSelectQuery = (query:any, fields: any, fieldMapObj: any, model:
 
         if (!fieldMapObj.hasOwnProperty(key)) {
             // Field from another table
-            resultObj = mapAssociatedField(key, model);
+            resultObj = mapAssociatedField(key, table);
             fieldsInTables.push(resultObj);
             continue
         }
 
-        resultObj[fieldMapObj[key]] = model;
+        resultObj[fieldMapObj[key]] = table;
         fieldsInTables.push(resultObj);
     }
 
@@ -44,4 +44,8 @@ export const makeSelectQuery = (query:any, fields: any, fieldMapObj: any, model:
     }
 
     return query;
+}
+
+export const makeWhereClause = (query: any, condition: any, fieldMapObj: any, table: any) => {
+
 }

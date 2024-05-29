@@ -3,8 +3,8 @@ import { makeSelectQuery } from "./converter";
 import { fieldsMap } from "./fields";
 
 class UserBuilder {
-    private model: string = "users"
-    private fieldMapObj: any = fieldsMap[this.model];
+    private table: string = "users"
+    private fieldMapObj: any = fieldsMap[this.table];
     public limit: number = 20;
     public offset: number = 0;
     public fields: any = {
@@ -18,7 +18,7 @@ class UserBuilder {
     public buildQuery(): any {
         let query = knex("users")
                                 .join("user_specs", "users.id", "user_specs.user_id");
-        query = makeSelectQuery(query, this.fields, this.fieldMapObj, this.model)
+        query = makeSelectQuery(query, this.fields, this.fieldMapObj, this.table)
 
         return query
         /* return knex("users")
