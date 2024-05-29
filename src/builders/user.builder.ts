@@ -13,7 +13,7 @@ class UserBuilder {
     public id: any = null;
 
     public buildQuery(): any {
-        return knex.select("users.first_name", "users.last_name")
+        return knex.select("users.first_name", "users.last_name").from("users")
     }
 }
 
