@@ -100,8 +100,6 @@ const makeWhereClause = (query: any, condition: any, fieldMapObj: any, table: an
 
 
 export const buildQuery = (query: any, fields: any, fieldMapObj: any, condition: any, table: any, id: any | null, limit: any, offset: any) => {
-    /* let query = knex("users")
-                            .join("user_specs", "users.id", "user_specs.user_id"); */
     query = makeSelectQuery(query, fields, fieldMapObj, table);
 
     if (id !== null) {
