@@ -1,5 +1,5 @@
 import knex from "./../database/db";
-import { makeSelectQuery, makeWhereClause } from "./converter";
+import { buildQuery } from "./converter";
 import { fieldsMap } from "./fields";
 
 class UserBuilder {
@@ -29,19 +29,10 @@ class UserBuilder {
     };
     public id: any = null;
 
-    public buildQuery(): any {
+    public build(): any {
         let query = knex("users")
                                 .join("user_specs", "users.id", "user_specs.user_id");
-        query = makeSelectQuery(query, this.fields, this.fieldMapObj, this.table);
-        if (this.id !== null) {
-            query = query.where("users.id", this.id);
-            return query
-        }
-        query = makeWhereClause(query, this.condition, this.fieldMapObj, this.table);
-        query = query.limit(this.limit);
-        query = query.offset(this.offset);
-
-        return query;
+        return buildQuery(query, this.fields, this.fieldMapObj, this.condition, this.table, this.id, this.limit, this.offset);
     }
 }
 

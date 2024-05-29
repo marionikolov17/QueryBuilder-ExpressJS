@@ -7,6 +7,10 @@ const OPERATIONS: any = {
     "GT": ">"
 }
 
+export const joinAssociatedTables = () => {
+
+}
+
 const mapAssociatedField = (field: any, table: any) => {
     let associationsTables = associationsObj[table];
     let resultObj: any = {};
@@ -24,7 +28,7 @@ const mapAssociatedField = (field: any, table: any) => {
     return resultObj;
 }
 
-export const makeSelectQuery = (query:any, fields: any, fieldMapObj: any, table: any) => {
+const makeSelectQuery = (query:any, fields: any, fieldMapObj: any, table: any) => {
     let fieldsInTables = [];
 
     // Find fields
@@ -71,7 +75,7 @@ const generateFieldString = (field: any, fieldMapObj: any, table: any) => {
     return `${tableName}.${fieldName}`;
 }
 
-export const makeWhereClause = (query: any, condition: any, fieldMapObj: any, table: any) => {
+const makeWhereClause = (query: any, condition: any, fieldMapObj: any, table: any) => {
     const conditionType = condition.type;
 
     // Make where clause for first field
@@ -95,6 +99,19 @@ export const makeWhereClause = (query: any, condition: any, fieldMapObj: any, ta
 }
 
 
-export const buildQuery = () => {
-    
+export const buildQuery = (query: any, fields: any, fieldMapObj: any, condition: any, table: any, id: any | null, limit: any, offset: any) => {
+    /* let query = knex("users")
+                            .join("user_specs", "users.id", "user_specs.user_id"); */
+    query = makeSelectQuery(query, fields, fieldMapObj, table);
+
+    if (id !== null) {
+        query = query.where("users.id", id);
+        return query
+    }
+
+    query = makeWhereClause(query, condition, fieldMapObj, table);
+    query = query.limit(limit);
+    query = query.offset(offset);
+
+    return query;
 }
