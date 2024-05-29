@@ -4,7 +4,7 @@ import * as configs from "./src/config/db.config";
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
-const connection = {
+const config = {
   development: {
     client: 'mysql2',
     connection: {
@@ -19,4 +19,4 @@ const connection = {
   }
 };
 
-export default connection;
+export default config;
