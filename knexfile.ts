@@ -11,7 +11,8 @@ const config = {
       host: configs.DB_HOST,
       user: configs.DB_USERNAME,
       password: configs.DB_PASSWORD,
-      database: configs.DB_NAME
+      database: configs.DB_NAME,
+      port: configs.DB_PORT
     },
     migrations: {
       directory: "./src/database/migrations"
