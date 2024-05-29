@@ -12,7 +12,21 @@ class UserBuilder {
         lastName: 1,
         sex: 1
     };
-    public condition: any;
+    public condition: any = {
+        type: "OR",
+        items: [
+            {
+                field: "firstName",
+                operation: "EQ",
+                value: "ivann"
+            },
+            {
+                field: "sex",
+                operation: "EQ",
+                value: "male"
+            }
+        ]
+    };
     public id: any = null;
 
     public buildQuery(): any {
