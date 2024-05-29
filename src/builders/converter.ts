@@ -93,3 +93,8 @@ export const makeWhereClause = (query: any, condition: any, fieldMapObj: any, ta
 
     return query;
 }
+
+
+export const buildQuery = () => {
+    
+}

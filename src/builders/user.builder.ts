@@ -13,7 +13,7 @@ class UserBuilder {
         sex: 1
     };
     public condition: any = {
-        type: "AND",
+        type: "OR",
         items: [
             {
                 field: "firstName",
@@ -33,7 +33,13 @@ class UserBuilder {
         let query = knex("users")
                                 .join("user_specs", "users.id", "user_specs.user_id");
         query = makeSelectQuery(query, this.fields, this.fieldMapObj, this.table);
+        if (this.id !== null) {
+            query = query.where("users.id", this.id);
+            return query
+        }
         query = makeWhereClause(query, this.condition, this.fieldMapObj, this.table);
+        query = query.limit(this.limit);
+        query = query.offset(this.offset);
 
         return query;
     }
