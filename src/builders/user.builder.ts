@@ -13,7 +13,11 @@ class UserBuilder {
     public id: any = null;
 
     public buildQuery(): any {
-        return knex.select("users.first_name", "users.last_name").from("users")
+        return knex("users")
+                   .join("user_specs", "users.id", "user_specs.user_id")
+                   .select("users.id", "first_name", "last_name", "user_specs.sex")
+                   .where("first_name", "mario").orWhere("user_specs.sex", "female")
+                   
     }
 }
 
