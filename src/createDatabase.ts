@@ -1,10 +1,20 @@
-import knex from "./database/db";
-import { DB_NAME } from "./config/db.config";
+import * as configs from "./config/db.config";
 
-knex.raw(`CREATE DATABASE IF NOT EXISTS knex`)
+const customConnection = {
+    host: configs.DB_HOST,
+    user: configs.DB_USERNAME,
+    password: configs.DB_PASSWORD
+}
+
+import knex from "knex";
+
+const knexConnect = knex({ client: "mysql2", connection: customConnection });
+
+knexConnect.raw(`CREATE DATABASE IF NOT EXISTS ${configs.DB_NAME}`)
     .then(() => {
-        knex.destroy();
+        knexConnect.destroy();
+        console.log("Successfully created database or exsisted.")
     })
-    .finally(() => {
-        console.log("Done.")
+    .catch((err) => {
+        console.log(err)
     });
