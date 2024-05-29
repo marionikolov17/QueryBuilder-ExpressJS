@@ -1,6 +1,6 @@
 import { associationsObj, fieldsMap } from "./fields";
 
-const OPERATIONS = {
+const OPERATIONS: any = {
     "EQ": "=",
     "NE": "!=",
     "LT": "<",
@@ -53,6 +53,43 @@ export const makeSelectQuery = (query:any, fields: any, fieldMapObj: any, table:
     return query;
 }
 
+const generateFieldString = (field: any, fieldMapObj: any, table: any) => {
+    let resultObj: any = {}
+
+    if (!fieldMapObj.hasOwnProperty(field)) {
+        resultObj = mapAssociatedField(field, table);
+
+        let [fieldName, tableName] = Object.entries(resultObj)[0];
+
+        return `${tableName}.${fieldName}`;
+    }
+
+    resultObj[fieldMapObj[field]] = table;
+
+    let [fieldName, tableName] = Object.entries(resultObj)[0];
+
+    return `${tableName}.${fieldName}`;
+}
+
 export const makeWhereClause = (query: any, condition: any, fieldMapObj: any, table: any) => {
     const conditionType = condition.type;
+
+    // Make where clause for first field
+    query = query.where(generateFieldString(condition.items[0].field, fieldMapObj, table), OPERATIONS[condition.items[0].operation], condition.items[0].value);
+
+    // Loop through every left item with the correct operation
+    for (let i = 1; i < condition.items.length; i++) {
+        let conditionItem = condition.items[i];
+        let itemField = conditionItem["field"];
+        let itemOperation = conditionItem["operation"];
+        let itemValue = conditionItem["value"];
+
+        if (conditionType === "AND") {
+            query = query.andWhere(generateFieldString(itemField, fieldMapObj, table), OPERATIONS[itemOperation], itemValue);
+        } else if (conditionType === "OR") {
+            query = query.orWhere(generateFieldString(itemField, fieldMapObj, table), OPERATIONS[itemOperation], itemValue);
+        }
+    }
+
+    return query;
 }

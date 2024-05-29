@@ -1,5 +1,5 @@
 import knex from "./../database/db";
-import { makeSelectQuery } from "./converter";
+import { makeSelectQuery, makeWhereClause } from "./converter";
 import { fieldsMap } from "./fields";
 
 class UserBuilder {
@@ -13,12 +13,12 @@ class UserBuilder {
         sex: 1
     };
     public condition: any = {
-        type: "OR",
+        type: "AND",
         items: [
             {
                 field: "firstName",
                 operation: "EQ",
-                value: "ivann"
+                value: "ivan"
             },
             {
                 field: "sex",
@@ -33,14 +33,9 @@ class UserBuilder {
         let query = knex("users")
                                 .join("user_specs", "users.id", "user_specs.user_id");
         query = makeSelectQuery(query, this.fields, this.fieldMapObj, this.table);
+        query = makeWhereClause(query, this.condition, this.fieldMapObj, this.table);
 
         return query;
-        /* return knex("users")
-                   .join("user_specs", "users.id", "user_specs.user_id")
-                   .select("users.id", "first_name", "user_specs.sex")
-                   .select("last_name")
-                   .where("first_name", "mario").orWhere("user_specs.sex", "female") */
-                   
     }
 }
 
