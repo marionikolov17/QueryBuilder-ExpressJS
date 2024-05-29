@@ -1,22 +1,31 @@
 import knex from "./../database/db";
+import { makeSelectQuery } from "./converter";
 import { fieldsMap } from "./fields";
 
 class UserBuilder {
-    private fieldMapObj: any = fieldsMap["user"];
+    private model: string = "users"
+    private fieldMapObj: any = fieldsMap[this.model];
     public limit: number = 20;
     public offset: number = 0;
     public fields: any = {
         firstName: 1,
-        lastName: 1
+        lastName: 1,
+        sex: 1
     };
     public condition: any;
     public id: any = null;
 
     public buildQuery(): any {
-        return knex("users")
+        let query = knex("users")
+                                .join("user_specs", "users.id", "user_specs.user_id");
+        query = makeSelectQuery(query, this.fields, this.fieldMapObj, this.model)
+
+        return query
+        /* return knex("users")
                    .join("user_specs", "users.id", "user_specs.user_id")
-                   .select("users.id", "first_name", "last_name", "user_specs.sex")
-                   .where("first_name", "mario").orWhere("user_specs.sex", "female")
+                   .select("users.id", "first_name", "user_specs.sex")
+                   .select("last_name")
+                   .where("first_name", "mario").orWhere("user_specs.sex", "female") */
                    
     }
 }
