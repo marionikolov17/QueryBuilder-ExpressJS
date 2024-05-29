@@ -14,7 +14,7 @@ export async function up(knex: Knex): Promise<void> {
         table.string("phone_number", 25).nullable().defaultTo(null);
         table.tinyint("user_role", 1).notNullable().defaultTo(-1);
         table.tinyint("visible").notNullable().defaultTo(1);
-        table.date("date_created").notNullable().defaultTo(Date.now());
+        table.datetime("date_created").notNullable().defaultTo(knex.fn.now());
     });
 }
 
