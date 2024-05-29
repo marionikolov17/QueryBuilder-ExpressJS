@@ -1,3 +1,4 @@
+import knex from "./../database/db";
 import { fieldsMap } from "./fields";
 
 class UserBuilder {
@@ -10,6 +11,10 @@ class UserBuilder {
     };
     public condition: any;
     public id: any = null;
+
+    public buildQuery(): any {
+        return knex.select("users.first_name", "users.last_name")
+    }
 }
 
 export default UserBuilder;
