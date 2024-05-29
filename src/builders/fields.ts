@@ -20,7 +20,7 @@ export const fieldsMap: any = {
   }
 };
 
-/* export const associationsObj: any = {
+export const associationsObj: any = {
   user: ["user_specs"] // fieldsMap names only
-} */
+}
 
