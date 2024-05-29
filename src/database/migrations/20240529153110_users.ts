@@ -13,7 +13,7 @@ export async function up(knex: Knex): Promise<void> {
         table.string("languages", 255).notNullable();
         table.string("phone_number", 25).nullable().defaultTo(null);
         table.tinyint("user_role", 1).notNullable().defaultTo(-1);
-        table.tinyint("visible").notNullable().defaultTo(1);
+        table.tinyint("visible").unsigned().notNullable().defaultTo(1);
         table.datetime("date_created").notNullable().defaultTo(knex.fn.now());
     });
 }
