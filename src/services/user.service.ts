@@ -1,3 +1,4 @@
+import knex from "knex";
 import UserBuilder from "./../builders/user.builder";
 
 export const getUsers = async (payload: any) => {
@@ -8,6 +9,6 @@ export const getUsers = async (payload: any) => {
 
 export const getUser = async (payload: any) => {};
 
-export const createUser = async (data: any) => {};
+export const createUser = async (data: any) => knex("users").insert(data);
 
-export const createUserSpecs = async (data: any) => {};
+export const createUserSpecs = async (data: any) => knex("user_specs").insert(data);
