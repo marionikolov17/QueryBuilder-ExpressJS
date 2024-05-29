@@ -1,5 +1,5 @@
 export const fieldsMap: any = {
-  user: {
+  users: {
     uid: "id",
     firstName: "first_name",
     lastName: "last_name",
@@ -21,6 +21,6 @@ export const fieldsMap: any = {
 };
 
 export const associationsObj: any = {
-  user: ["user_specs"] // fieldsMap names only
+  users: ["user_specs"] // fieldsMap names only
 }
 
