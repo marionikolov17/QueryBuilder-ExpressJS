@@ -6,7 +6,9 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "start:dev": "nodemon",
-    "migrate": "knex migrate"
+    "migrate": "knex migrate:latest",
+    "migrate:undo": "knex migrate:rollback",
+    "migrate:up": "knex migrate:up" 
   },
   "keywords": [],
   "author": "",
