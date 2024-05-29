@@ -32,9 +32,9 @@ class UserBuilder {
     public buildQuery(): any {
         let query = knex("users")
                                 .join("user_specs", "users.id", "user_specs.user_id");
-        query = makeSelectQuery(query, this.fields, this.fieldMapObj, this.table)
+        query = makeSelectQuery(query, this.fields, this.fieldMapObj, this.table);
 
-        return query
+        return query;
         /* return knex("users")
                    .join("user_specs", "users.id", "user_specs.user_id")
                    .select("users.id", "first_name", "user_specs.sex")
