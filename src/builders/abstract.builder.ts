@@ -61,6 +61,10 @@ abstract class AbstractBuilder {
     fieldMapObj: any,
     table: string
   ) {
+    if (fields === undefined) {
+        return query.select("*");
+    }
+
     let fieldsInTables = [];
 
     // Find fields
@@ -95,6 +99,10 @@ abstract class AbstractBuilder {
     fieldMapObj: any,
     table: string
   ) {
+    if (condition === undefined) {
+        return query;
+    }
+
     const conditionType = condition.type;
 
     // Make where clause for first field
