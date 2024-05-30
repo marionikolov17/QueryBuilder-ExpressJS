@@ -1,21 +1,20 @@
-import { createConnection } from "mysql2/promise";
 import * as configs from "./config/db.config";
 
-async function createDatabase() {
-  const connection = await createConnection({
+const customConnection = {
     host: configs.DB_HOST,
-    port: configs.DB_PORT,
     user: configs.DB_USERNAME,
-    password: configs.DB_PASSWORD,
-  });
-
-  await connection.query(
-    `CREATE DATABASE IF NOT EXISTS \`${configs.DB_NAME}\`;`
-  );
-  console.log(`Database ${configs.DB_NAME} created or already exsits`);
-  await connection.end();
+    password: configs.DB_PASSWORD
 }
 
-createDatabase().catch((err) => {
-  console.log(`Error on creating database: ${err}`);
-});
+import knex from "knex";
+
+const knexConnect = knex({ client: "mysql2", connection: customConnection });
+
+knexConnect.raw(`CREATE DATABASE IF NOT EXISTS ${configs.DB_NAME}`)
+    .then(() => {
+        knexConnect.destroy();
+        console.log("Successfully created database or exsisted.")
+    })
+    .catch((err) => {
+        console.log(err)
+    });
