@@ -9,7 +9,6 @@ const OPERATIONS: any = {
 
 abstract class AbstractBuilder {
   // Class properties for overriding
-  
 
   // Helper functions
   private mapAssociatedField(field: any, table: any) {
@@ -118,6 +117,31 @@ abstract class AbstractBuilder {
         );
       }
     }
+
+    return query;
+  }
+
+  // Builder main function
+  protected buildQuery(
+    query: any,
+    fields: any,
+    fieldMapObj: any,
+    condition: any,
+    table: any,
+    id: any | null,
+    limit: any,
+    offset: any
+  ) {
+    query = this.makeSelectQuery(query, fields, fieldMapObj, table);
+
+    if (id !== null) {
+      query = query.where("users.id", id);
+      return query;
+    }
+
+    query = this.makeWhereClause(query, condition, fieldMapObj, table);
+    query = query.limit(limit);
+    query = query.offset(offset);
 
     return query;
   }
