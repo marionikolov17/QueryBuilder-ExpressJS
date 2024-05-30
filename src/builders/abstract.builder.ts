@@ -7,6 +7,8 @@ const OPERATIONS: any = {
     "GT": ">"
 }
 
-class AbstractBuilder {
+abstract class AbstractBuilder {
     
 }
+
+export default AbstractBuilder;
