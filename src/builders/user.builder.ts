@@ -1,18 +1,19 @@
 import knex from "./../database/db";
-import { buildQuery } from "./converter";
+import AbstractBuilder from "./abstract.builder";
 import { fieldsMap } from "./fields";
+import { Condition } from "./types";
 
-class UserBuilder {
-    private table: string = "users"
-    private fieldMapObj: any = fieldsMap[this.table];
-    public limit: number = 20;
-    public offset: number = 0;
-    public fields: any = {
+class UserBuilder extends AbstractBuilder {
+    override table: string = "users"
+    override fieldMapObj: any = fieldsMap[this.table];
+    override limit: number = 20;
+    override offset: number = 0;
+    override fields: any = {
         firstName: 1,
         lastName: 1,
         sex: 1
     };
-    public condition: any = {
+    override condition: Condition = {
         type: "OR",
         items: [
             {
@@ -27,14 +28,14 @@ class UserBuilder {
             }
         ]
     };
-    public id: any = null;
+    override id: any = null;
 
-    public build(): any {
+    public executeQuery(): any {
         // Create main query object
         // And join all association tables and fields here
         let query = knex("users")
                                 .join("user_specs", "users.id", "user_specs.user_id");
-        return buildQuery(query, this.fields, this.fieldMapObj, this.condition, this.table, this.id, this.limit, this.offset);
+        return this.buildQuery(query, this.fields, this.fieldMapObj, this.condition, this.table, this.id, this.limit, this.offset);
     }
 }
 

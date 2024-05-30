@@ -1,4 +1,5 @@
 import { associationsObj, fieldsMap } from "./fields";
+import { Condition } from "./types";
 
 const OPERATIONS: any = {
   EQ: "=",
@@ -9,6 +10,13 @@ const OPERATIONS: any = {
 
 abstract class AbstractBuilder {
   // Class properties for overriding
+  protected table: string;
+  protected fieldMapObj: any;
+  protected limit: number;
+  protected offset: number;
+  protected fields: any;
+  protected condition: Condition;
+  protected id: number | null;
 
   // Helper functions
   private mapAssociatedField(field: any, table: string) {
