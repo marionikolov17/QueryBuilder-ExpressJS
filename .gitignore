@@ -3,4 +3,3 @@ build
 dist
 images
 sql
-/src/builder/converter.ts
