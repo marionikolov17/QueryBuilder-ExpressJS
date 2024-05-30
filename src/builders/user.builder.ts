@@ -34,7 +34,7 @@ class UserBuilder extends AbstractBuilder {
         // Create main query object
         // And join all association tables and fields here
         let query = knex("users")
-                                .join("user_specs", "users.id", "user_specs.user_id");
+                                .leftJoin("user_specs", "users.id", "user_specs.user_id");
         return this.buildQuery(query, this.fields, this.fieldMapObj, this.condition, this.table, this.id, this.limit, this.offset);
     }
 }
