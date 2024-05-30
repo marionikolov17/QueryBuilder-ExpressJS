@@ -1,5 +1,5 @@
-import { associationsObj, fieldsMap } from "./fields";
-import { Condition } from "./types";
+import { associationsObj, fieldsMap } from "./utils/fields";
+import { Condition } from "./types/types";
 
 const OPERATIONS: any = {
   EQ: "=",
