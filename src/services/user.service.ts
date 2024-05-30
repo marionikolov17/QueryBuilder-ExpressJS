@@ -16,7 +16,7 @@ export const getUsers = async (payload: any) => {
         builder.condition = payload.condition;
     }
 
-    return builder.build();
+    return builder.executeQuery();
 };
 
 export const getUser = async (payload: any) => {
@@ -26,7 +26,7 @@ export const getUser = async (payload: any) => {
     }
     builder.id = payload.id;
 
-    return builder.build();
+    return builder.executeQuery();
 };
 
 export const createUser = async (data: any) => db("users").insert(data);
