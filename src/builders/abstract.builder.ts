@@ -19,7 +19,7 @@ abstract class AbstractBuilder {
   protected id: number | null;
 
   // Helper functions
-  private mapAssociatedField(field: any, table: string) {
+  private mapAssociatedField(field: string, table: string) {
     let associationsTables = associationsObj[table];
     let resultObj: any = {};
 
@@ -36,7 +36,7 @@ abstract class AbstractBuilder {
     return resultObj;
   }
 
-  private generateFieldString(field: any, fieldMapObj: any, table: string) {
+  private generateFieldString(field: string, fieldMapObj: any, table: string) {
     let resultObj: any = {};
 
     if (!fieldMapObj.hasOwnProperty(field)) {
@@ -91,7 +91,7 @@ abstract class AbstractBuilder {
 
   private makeWhereClause(
     query: any,
-    condition: any,
+    condition: Condition,
     fieldMapObj: any,
     table: string
   ) {
@@ -134,7 +134,7 @@ abstract class AbstractBuilder {
     query: any,
     fields: any,
     fieldMapObj: any,
-    condition: any,
+    condition: Condition,
     table: string,
     id: any | null,
     limit: number | null | undefined,
