@@ -8,26 +8,8 @@ class UserBuilder extends AbstractBuilder {
   override fieldMapObj: any = fieldsMap[this.table];
   override limit: number = 20;
   override offset: number = 0;
-  override fields: any = {
-    firstName: 1,
-    lastName: 1,
-    sex: 1,
-  };
-  override condition: Condition = {
-    type: "OR",
-    items: [
-      {
-        field: "firstName",
-        operation: "EQ",
-        value: "ivan",
-      },
-      {
-        field: "sex",
-        operation: "EQ",
-        value: "male",
-      },
-    ],
-  };
+  override fields: any;
+  override condition: Condition;
   override id: any = null;
 
   public executeQuery(): any {
