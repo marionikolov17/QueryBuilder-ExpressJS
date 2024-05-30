@@ -11,7 +11,7 @@ abstract class AbstractBuilder {
   // Class properties for overriding
 
   // Helper functions
-  private mapAssociatedField(field: any, table: any) {
+  private mapAssociatedField(field: any, table: string) {
     let associationsTables = associationsObj[table];
     let resultObj: any = {};
 
@@ -28,7 +28,7 @@ abstract class AbstractBuilder {
     return resultObj;
   }
 
-  private generateFieldString(field: any, fieldMapObj: any, table: any) {
+  private generateFieldString(field: any, fieldMapObj: any, table: string) {
     let resultObj: any = {};
 
     if (!fieldMapObj.hasOwnProperty(field)) {
@@ -51,7 +51,7 @@ abstract class AbstractBuilder {
     query: any,
     fields: any,
     fieldMapObj: any,
-    table: any
+    table: string
   ) {
     let fieldsInTables = [];
 
@@ -85,7 +85,7 @@ abstract class AbstractBuilder {
     query: any,
     condition: any,
     fieldMapObj: any,
-    table: any
+    table: string
   ) {
     const conditionType = condition.type;
 
@@ -127,10 +127,10 @@ abstract class AbstractBuilder {
     fields: any,
     fieldMapObj: any,
     condition: any,
-    table: any,
+    table: string,
     id: any | null,
-    limit: any,
-    offset: any
+    limit: number | null | undefined,
+    offset: number | null | undefined
   ) {
     query = this.makeSelectQuery(query, fields, fieldMapObj, table);
 
