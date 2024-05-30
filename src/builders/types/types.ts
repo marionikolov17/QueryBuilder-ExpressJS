@@ -1,9 +1,9 @@
-export interface QueryParams {
+/* export interface QueryParams {
   limit: number | null | undefined;
   offset: number | null | undefined;
   what: Record<string, number> | null | undefined;
   condition: Condition | null | undefined;
-}
+} */
 
 export interface Condition {
   type: string;
