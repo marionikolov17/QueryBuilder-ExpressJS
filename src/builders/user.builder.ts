@@ -8,9 +8,9 @@ class UserBuilder extends AbstractBuilder {
   override fieldMapObj: any = fieldsMap[this.table];
   override limit: number = 20;
   override offset: number = 0;
-  override fields: any;
-  override condition: Condition;
-  override id: any = null;
+  override fields: any; // Specify Default fields for selection here, Otherwise it will select all
+  override condition: Condition; // Specify Default Condition for where clause here, otherwise there will be no condition
+  override id: any = null; 
 
   public executeQuery(): any {
     // Create main query object
