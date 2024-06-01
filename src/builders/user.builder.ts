@@ -5,8 +5,8 @@ import { AssociationItem, Condition } from "./types/types";
 class UserBuilder extends AbstractBuilder {
   override table: string = "users";
   override fieldMapObj: any = fieldsMap[this.table];
-  override limit: number = 20;
-  override offset: number = 0;
+  override limit: number = 20; // Specify default limit here, otherwise it will not be reflected on the query
+  override offset: number = 0; // Specify default offset here, otherwise it will not be reflected on the query
   override fields: Record<string, number>; // Specify Default fields for selection here, Otherwise it will select all
   override condition: Condition; // Specify Default Condition for where clause here, otherwise there will be no condition
   override id: number | null = null;
