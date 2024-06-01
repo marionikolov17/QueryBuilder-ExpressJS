@@ -10,7 +10,7 @@ class UserBuilder extends AbstractBuilder {
   override fields: Record<string, number>; // Specify Default fields for selection here, Otherwise it will select all
   override condition: Condition; // Specify Default Condition for where clause here, otherwise there will be no condition
   override id: number | null = null;
-  override associations: Array<AssociationItem> = [
+  override associations: Array<AssociationItem | undefined> = [ // Specify associations here, otherwise there will be no join tables
     {
       mainField: "id",
       relatedTable: "user_specs",
