@@ -1,5 +1,6 @@
 import { associationsObj, fieldsMap } from "./utils/fields";
-import { Condition } from "./types/types";
+import { AssociationItem, Condition } from "./types/types";
+import knex from "./../database/db";
 
 const OPERATIONS: any = {
   EQ: "=",
@@ -17,6 +18,7 @@ abstract class AbstractBuilder {
   protected fields: any;
   protected condition: Condition;
   protected id: number | null;
+  protected associations: Array<AssociationItem>;
 
   // Helper functions
   private mapAssociatedField(field: string, table: string) {
@@ -62,7 +64,7 @@ abstract class AbstractBuilder {
     table: string
   ) {
     if (fields === undefined) {
-        return query.select("*");
+      return query.select("*");
     }
 
     let fieldsInTables = [];
@@ -100,7 +102,7 @@ abstract class AbstractBuilder {
     table: string
   ) {
     if (condition === undefined) {
-        return query;
+      return query;
     }
 
     const conditionType = condition.type;
@@ -137,27 +139,54 @@ abstract class AbstractBuilder {
     return query;
   }
 
-  // Builder main function
-  protected buildQuery(
-    query: any,
-    fields: any,
-    fieldMapObj: any,
-    condition: Condition,
-    table: string,
-    id: any | null,
-    limit: number | null | undefined,
-    offset: number | null | undefined
-  ) {
-    query = this.makeSelectQuery(query, fields, fieldMapObj, table);
-
-    if (id !== null) {
-      query = query.where("users.id", id);
+  private makeAssociations(query: any) {
+    // If there are not any association tables
+    if (this.associations.length === 0) {
       return query;
     }
 
-    query = this.makeWhereClause(query, condition, fieldMapObj, table);
-    query = query.limit(limit);
-    query = query.offset(offset);
+    for (let associationItem of this.associations) {
+      query = query.leftJoin(
+        associationItem.relatedTable,
+        `${this.table}.${associationItem.mainField}`,
+        `${associationItem.relatedTable}.${associationItem.relatedField}`
+      );
+    }
+    return query;
+  }
+
+  // Builder main function
+  public executeQuery() {
+    let query = knex(this.table);
+
+    // Connect to association tables
+    query = this.makeAssociations(query);
+
+    // Make the select statement
+    query = this.makeSelectQuery(
+      query,
+      this.fields,
+      this.fieldMapObj,
+      this.table
+    );
+
+    // Check for id, if there is id set it and end the function
+    if (this.id !== null) {
+      query = query.where("users.id", this.id);
+      return query;
+    }
+
+    // Make the where clause
+    query = this.makeWhereClause(
+      query,
+      this.condition,
+      this.fieldMapObj,
+      this.table
+    );
+
+    // Set limit and offset
+    query = query.limit(this.limit);
+    query = query.offset(this.offset);
 
     return query;
   }
