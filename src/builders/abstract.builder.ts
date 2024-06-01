@@ -57,6 +57,8 @@ abstract class AbstractBuilder {
   }
 
   // Statement functions
+
+  // Select query builder
   private makeSelectQuery(
     query: any,
     fields: any,
@@ -95,6 +97,8 @@ abstract class AbstractBuilder {
     return query;
   }
 
+
+  // Where clause builder
   private makeWhereClause(
     query: any,
     condition: Condition,
@@ -139,6 +143,7 @@ abstract class AbstractBuilder {
     return query;
   }
 
+  // Association (join) query builder
   private makeAssociations(query: any) {
     // If there are not any association tables
     if (this.associations.length === 0) {
@@ -154,6 +159,7 @@ abstract class AbstractBuilder {
     }
     return query;
   }
+  
 
   // Builder main function
   public executeQuery() {
