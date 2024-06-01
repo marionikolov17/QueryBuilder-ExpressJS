@@ -13,8 +13,8 @@ abstract class AbstractBuilder {
   // Class properties for overriding
   protected table: string;
   protected fieldMapObj: any;
-  protected limit: number;
-  protected offset: number;
+  protected limit: number | null | undefined;
+  protected offset: number | null | undefined;
   protected fields: any;
   protected condition: Condition;
   protected id: number | null;
@@ -159,7 +159,7 @@ abstract class AbstractBuilder {
     }
     return query;
   }
-  
+
 
   // Builder main function
   public executeQuery() {
@@ -191,8 +191,12 @@ abstract class AbstractBuilder {
     );
 
     // Set limit and offset
-    query = query.limit(this.limit);
-    query = query.offset(this.offset);
+    if (this.limit !== null && this.limit !== undefined) {
+      query = query.limit(this.limit);
+    }
+    if (this.offset !== null && this.offset !== undefined) {
+      query = query.offset(this.offset);
+    }
 
     return query;
   }
