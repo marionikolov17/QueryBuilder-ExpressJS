@@ -79,6 +79,8 @@ abstract class AbstractBuilder {
 
       if (!fieldMapObj.hasOwnProperty(key)) {
         // Field from another table
+        if (this.associations.length === 0) continue
+        
         resultObj = this.mapAssociatedField(key, table);
         fieldsInTables.push(resultObj);
         continue;
